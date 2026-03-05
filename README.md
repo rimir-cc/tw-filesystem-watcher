@@ -20,6 +20,10 @@ Watches the tiddlers directory for external filesystem changes (created, modifie
 
 Install plugin. Configure the poll interval in ControlPanel > Settings > filesystem watcher. External file changes in the tiddlers directory sync automatically into the running wiki.
 
+## Plugin Library
+
+Install from the [rimir plugin library](https://rimir-cc.github.io/tw-plugin-library/) via *Control Panel → Plugins → Get more plugins*.
+
 ## License
 
 MIT -- see [LICENSE.md](LICENSE.md)
