@@ -1,0 +1,49 @@
+created: 20260305110636213
+modified: 20260305110636213
+rdt.order: 3
+rdt.plugin-key: filesystem-watcher
+rdt.plugin-name: filesystem watcher
+rdt.plugin-subtitle: Live sync of external filesystem changes into the running wiki
+rdt.section: Dev Workflow
+title: $:/plugins/rimir/filesystem-watcher/doc/dev-workflow
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! Plugin files
+
+|!File |!Role |
+|`watcher.js` |Server-side startup module (chokidar watcher) |
+|`reload-indicator.js` |Browser-side module (sets temp flag + body class) |
+|`styles.tid` |CSS for red refresh icon |
+|`config.tid` |Sets `$:/config/SyncPollingInterval` |
+
+!! Tiddler behavior
+
+|!Tiddler type |!Sync behavior |!Alert? |
+|Regular tiddler |Syncs live to browser (~4s) |No |
+|System tiddler (`$:/`) |Loads on server, doesn't sync |Yes — yellow alert + red icon |
+|Module tiddler (JS) |Loads on server, doesn't sync |Yes — yellow alert + red icon |
+
+!! Development workflow
+
+# Edit tiddler files in `mywiki/tiddlers/`
+# Regular tiddlers appear in browser within the poll interval
+# System/module tiddlers trigger alert + red refresh icon
+# Dismiss alert (icon stays red)
+# Click refresh button or press F5 to reload
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/callout" type="tip">
+<$fill $name="body">TiddlyWiki encodes `$:/` as `$__` in filenames on disk.</$fill>
+</$transclude>
+
+!! Restart rules
+
+|!Change |!Restart needed? |
+|Edit `watcher.js` |Yes — JS module |
+|Edit `reload-indicator.js` |Yes — JS module |
+|Edit `styles.tid` or `config.tid` |No — filesystem-watcher syncs these |
+
+</$fill>
+</$transclude>

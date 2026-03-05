@@ -1,0 +1,39 @@
+created: 20260305110636214
+modified: 20260305110636214
+rdt.order: 5
+rdt.plugin-key: filesystem-watcher
+rdt.plugin-name: filesystem watcher
+rdt.plugin-subtitle: Live sync of external filesystem changes into the running wiki
+rdt.section: FAQ
+title: $:/plugins/rimir/filesystem-watcher/doc/faq
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! Q: Why don't system tiddlers sync to the browser?
+
+TiddlyWiki's browser-side syncer polls `GET /recipes/default/tiddlers.json` which excludes `$:/` tiddlers by default. The config tiddler `$:/config/SyncSystemTiddlersFromServer` is `"no"` out of the box. The watcher loads them into `$tw.wiki` on the server, but the browser never fetches them. A full page reload (F5) is the only way to pick them up.
+
+!! Q: How do I change the poll interval?
+
+Edit `config.tid` in the plugin directory. It sets `$:/config/SyncPollingInterval` (value in milliseconds). Default is `4000` (4 seconds). Lower values mean faster sync but more HTTP traffic.
+
+!! Q: What if chokidar misses a change?
+
+Chokidar uses `awaitWriteFinish` with a 200ms stability threshold. If a file is still being written when the threshold fires, it may read a partial file. In practice this is rare. If you suspect a missed change, save the file again or restart the server.
+
+!! Q: Can I watch additional directories?
+
+No. The watcher monitors only `$tw.boot.wikiTiddlersPath` (the `tiddlers/` directory). Watching additional paths would require modifying `watcher.js`.
+
+!! Q: Why a red icon AND a yellow alert?
+
+The yellow alert is a standard TW notification (tagged `$:/tags/Alert`) that tells you what changed. Once you dismiss the alert, there's no reminder that a reload is needed. The red refresh icon (via `body.tc-reload-needed` CSS class) persists until you actually reload, so you don't forget.
+
+!! Q: Does the write-lock ever cause problems?
+
+The lock window is 1500ms. If you save a tiddler in the browser and then immediately save the same file externally within 1.5 seconds, the external change will be ignored. In practice this timing collision is extremely unlikely.
+
+</$fill>
+</$transclude>

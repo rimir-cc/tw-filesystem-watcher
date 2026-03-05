@@ -1,0 +1,66 @@
+created: 20260305110636214
+modified: 20260305110636214
+rdt.order: 4
+rdt.plugin-key: filesystem-watcher
+rdt.plugin-name: filesystem watcher
+rdt.plugin-subtitle: Live sync of external filesystem changes into the running wiki
+rdt.section: Examples
+title: $:/plugins/rimir/filesystem-watcher/doc/examples
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! Edit a tiddler in an external editor
+
+# Open `mywiki/tiddlers/MyTiddler.tid` in VS Code (or any text editor)
+# Change the `text:` content and save the file
+# Within ~4 seconds (poll interval), the tiddler updates in the browser
+# No server restart needed — the watcher detects the change via chokidar
+
+!! Create a new tiddler from the filesystem
+
+# Create a new file `mywiki/tiddlers/NewTiddler.tid`:
+
+```
+title: NewTiddler
+tags: example
+
+This is created from the filesystem.
+```
+
+# Save the file — the watcher picks it up and calls `$tw.wiki.addTiddler()`
+# The tiddler appears in the browser after the next syncer poll
+
+!! Delete a tiddler from the filesystem
+
+# Delete `mywiki/tiddlers/MyTiddler.tid` from disk
+# The watcher calls `$tw.wiki.deleteTiddler()` and cleans up `$tw.boot.files`
+# The tiddler disappears from the browser after the next syncer poll
+
+!! Bulk file operations
+
+Edit or create multiple `.tid` files at once (e.g., via a script). Each file triggers a debounced (200ms) change event. All tiddlers sync to the browser within one poll interval.
+
+!! System tiddler change (triggers reload alert)
+
+# Edit a file that maps to a `$:/` title (filename starts with `$__`)
+# The watcher loads it on the server and creates a yellow alert
+# The browser shows the alert + red refresh icon
+# Dismiss the alert — the red icon stays until you press F5
+
+!! Adjusting the poll interval
+
+Edit `config.tid` in the plugin directory to change `$:/config/SyncPollingInterval`:
+
+```
+title: $:/config/SyncPollingInterval
+type: text/plain
+
+2000
+```
+
+Lower values (e.g., 2000ms) mean faster sync but more HTTP requests.
+
+</$fill>
+</$transclude>

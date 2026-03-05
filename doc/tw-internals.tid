@@ -1,0 +1,52 @@
+created: 20260305110636215
+modified: 20260305110636215
+rdt.order: 7
+rdt.plugin-key: filesystem-watcher
+rdt.plugin-name: filesystem watcher
+rdt.plugin-subtitle: Live sync of external filesystem changes into the running wiki
+rdt.section: TW Internals
+title: $:/plugins/rimir/filesystem-watcher/doc/tw-internals
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! Boot and file loading
+
+* `$tw.loadTiddlersFromFile(filepath)` — parses `.tid`/`.meta` files into tiddler objects
+* `$tw.boot.files[title]` — maps tiddler titles to filesystem paths
+* `$tw.boot.wikiTiddlersPath` — base path for the tiddlers directory
+
+!! Wiki store
+
+* `$tw.wiki.addTiddler(tiddler)` — adds/updates a tiddler in the store
+* `$tw.wiki.deleteTiddler(title)` — removes a tiddler from the store
+* `$tw.wiki.getChangeCount(title)` — returns the change counter for a tiddler
+
+!! Server-side syncer
+
+* `$tw.syncer.tiddlerInfo[title]` — tracks change counts per tiddler
+* When `tiddlerInfo.changeCount` matches `wiki.getChangeCount()`, the syncer skips re-saving
+
+!! Browser-side syncer
+
+* Polls `GET /recipes/default/tiddlers.json` at the configured interval
+* `$:/config/SyncPollingInterval` controls the polling frequency
+* `$:/config/SyncSystemTiddlersFromServer` defaults to `"no"` — system tiddlers don't sync
+
+!! Filesystem adaptor
+
+* `saveTiddlerToFile` / `deleteTiddlerFile` — internal methods hooked for loop prevention
+* The watcher intercepts these to track which writes originated from TW itself
+
+!! Alert mechanism
+
+* Tiddlers tagged `$:/tags/Alert` render as yellow notification banners
+* Pattern borrowed from TW's dirty indicator: `body.tc-dirty` → adapted as `body.tc-reload-needed`
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/callout" type="info">
+<$fill $name="body">`$:/config/SyncSystemTiddlersFromServer` defaults to `"no"` — this is why system tiddlers need a full page reload to appear in the browser.</$fill>
+</$transclude>
+
+</$fill>
+</$transclude>

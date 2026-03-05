@@ -1,0 +1,9 @@
+created: 20260305110636215
+modified: 20260305110636215
+tags: $:/tags/Stylesheet
+title: $:/plugins/rimir/filesystem-watcher/styles
+type: text/vnd.tiddlywiki
+
+body.tc-reload-needed .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Frefresh svg {
+    fill: #ff0000;
+}

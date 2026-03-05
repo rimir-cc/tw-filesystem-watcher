@@ -1,0 +1,43 @@
+created: 20260305110636213
+modified: 20260305110636213
+rdt.order: 2
+rdt.plugin-key: filesystem-watcher
+rdt.plugin-name: filesystem watcher
+rdt.plugin-subtitle: Live sync of external filesystem changes into the running wiki
+rdt.section: Architecture
+title: $:/plugins/rimir/filesystem-watcher/doc/architecture
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! Data flow
+
+Filesystem change → chokidar → `$tw.loadTiddlersFromFile()` → `wiki.addTiddler()` (or `wiki.deleteTiddler()` for removals)
+
+!! Components
+
+|!Component |!Layer |!Role |
+|`watcher.js` |Server (Node.js) |Main module — chokidar watcher, file loading, loop prevention |
+|`reload-indicator.js` |Browser |Sets `$:/temp/` flag + `body.tc-reload-needed` class on alert |
+|`styles.tid` |Browser CSS |Red refresh icon styling via `body.tc-reload-needed` |
+|`config.tid` |Config |Sets `$:/config/SyncPollingInterval` |
+
+!! Loop prevention
+
+Hooks `saveTiddlerToFile` and `deleteTiddlerFile` with a write-lock. When TW itself writes a file, the lock prevents the watcher from re-importing it.
+
+!! Syncer info update
+
+After importing a tiddler, updates `$tw.syncer.tiddlerInfo[title].changeCount` to match the wiki's change count. This prevents the syncer from re-saving the tiddler back to disk.
+
+!! Reload detection
+
+System tiddlers (`$:/` prefix) and module tiddlers (`type: application/javascript` with `module-type` field) don't sync to the browser via the normal polling mechanism. The watcher creates an alert tiddler (tagged `$:/tags/Alert`) and the browser-side `reload-indicator.js` sets a `$:/temp/` flag + adds `tc-reload-needed` CSS class to `document.body`.
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/callout" type="warning">
+<$fill $name="body">The red refresh icon persists after dismissing the alert. Only a full page reload (F5) clears it.</$fill>
+</$transclude>
+
+</$fill>
+</$transclude>

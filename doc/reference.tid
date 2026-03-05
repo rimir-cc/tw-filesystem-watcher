@@ -1,0 +1,54 @@
+created: 20260305110636215
+modified: 20260305110636215
+rdt.order: 6
+rdt.plugin-key: filesystem-watcher
+rdt.plugin-name: filesystem watcher
+rdt.plugin-subtitle: Live sync of external filesystem changes into the running wiki
+rdt.section: Reference
+title: $:/plugins/rimir/filesystem-watcher/doc/reference
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! Config tiddlers
+
+|!Tiddler |!Default |!Description |
+|`$:/config/SyncPollingInterval` |`4000` |Browser polling interval in ms |
+|`$:/config/SyncSystemTiddlersFromServer` |`"no"` |Whether system tiddlers sync (TW core, not plugin) |
+
+!! State / temp tiddlers
+
+|!Tiddler |!Set by |!Purpose |
+|`alerts/filesystem-watcher-reload` |Server (watcher.js) |Yellow alert banner, tagged `$:/tags/Alert` |
+|`$:/temp/filesystem-watcher-reload-needed` |Browser (reload-indicator.js) |Persists reload-needed state after alert dismissed |
+
+!! CSS classes
+
+|!Class |!Element |!Description |
+|`tc-reload-needed` |`document.body` |Added when reload is needed, removed on F5 |
+
+!! Internal constants (watcher.js)
+
+|!Constant |!Value |!Description |
+|`WRITE_LOCK_MS` |`1500` |Ignore filesystem events within this window after TW writes |
+|`DEBOUNCE_MS` |`200` |Debounce rapid filesystem events |
+|`ALERT_TITLE` |`"alerts/filesystem-watcher-reload"` |Title of the reload alert tiddler |
+
+!! chokidar config
+
+|!Option |!Value |
+|`ignored` |`/(^|[\/\\])\./` (dotfiles) |
+|`persistent` |`true` |
+|`ignoreInitial` |`true` |
+|`awaitWriteFinish.stabilityThreshold` |`200` |
+|`awaitWriteFinish.pollInterval` |`50` |
+
+!! Hook points
+
+|!Hooked function |!Purpose |
+|`$tw.utils.saveTiddlerToFile` |Write-lock: tracks TW's own file writes |
+|`$tw.utils.deleteTiddlerFile` |Write-lock: tracks TW's own file deletes |
+
+</$fill>
+</$transclude>

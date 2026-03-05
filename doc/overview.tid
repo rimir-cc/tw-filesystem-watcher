@@ -1,0 +1,47 @@
+created: 20260305110636214
+modified: 20260305110636214
+rdt.hub-category: infrastructure
+rdt.hub-category-name: Infrastructure
+rdt.hub-order: 1
+rdt.order: 1
+rdt.plugin-key: filesystem-watcher
+rdt.plugin-name: filesystem watcher
+rdt.plugin-subtitle: Live sync of external filesystem changes into the running wiki
+rdt.section: Overview
+title: $:/plugins/rimir/filesystem-watcher/doc/overview
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! What it does
+
+Watches the wiki's tiddlers directory for external filesystem changes (create, modify, delete) and syncs them into the running wiki in real-time using chokidar.
+
+!! Features
+
+* ''Live sync'' — file changes detected via chokidar, fed into `$tw.wiki` store
+* ''No duplicates'' — updates `$tw.syncer.tiddlerInfo` to prevent syncer from re-saving
+* ''Reload alerts'' — yellow alert + red refresh icon for system/module tiddlers
+* ''Loop prevention'' — hooks `saveTiddlerToFile`/`deleteTiddlerFile` with write-lock
+* ''Cross-platform'' — works on Windows, macOS, Linux
+* ''Configurable poll interval'' via `config.tid`
+
+!! Prerequisites
+
+* TiddlyWiki running in Node.js server mode
+* `chokidar` npm package installed
+* Refresh button enabled in Control Panel > Settings > Toolbars > Page Toolbar
+
+!! Quick start
+
+# Install chokidar: `npm install chokidar`
+# Start the server: `npx tiddlywiki mywiki --listen`
+# Edit any tiddler file in `mywiki/tiddlers/` — changes appear within the configured poll interval
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/callout" type="info">
+<$fill $name="body">Regular tiddlers sync automatically. System tiddlers (`$:/` prefix) and module tiddlers trigger a reload alert because they don't sync to the browser by default.</$fill>
+</$transclude>
+
+</$fill>
+</$transclude>

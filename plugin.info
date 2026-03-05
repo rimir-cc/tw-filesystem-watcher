@@ -1,0 +1,10 @@
+{
+    "title": "$:/plugins/rimir/filesystem-watcher",
+    "description": "Watches the tiddlers directory for external filesystem changes and syncs them into the wiki",
+    "author": "rimir",
+    "version": "0.1.0",
+    "core-version": ">=5.3.0",
+    "source": "",
+    "plugin-type": "plugin",
+    "list": "readme settings"
+}
