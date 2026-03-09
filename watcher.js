@@ -143,12 +143,20 @@ exports.startup = function(callback) {
 		logger.log("Reload required for:", changedTitle, "(" + reason + ")");
 	}
 
+	// Tiddler titles to ignore — these change too frequently and have no value for external sync
+	var IGNORED_TITLES = ["$:/StoryList"];
+
 	function isWatcherFile(filepath) {
 		return path.basename(filepath).indexOf("alerts_filesystem-watcher") === 0;
 	}
 
+	function isIgnoredTitle(filepath) {
+		var title = findTitleByPath(filepath);
+		return title && IGNORED_TITLES.indexOf(title) !== -1;
+	}
+
 	function handleFileChange(filepath) {
-		if(isWatcherFile(filepath) || isRecentlyWritten(filepath)) {
+		if(isWatcherFile(filepath) || isRecentlyWritten(filepath) || isIgnoredTitle(filepath)) {
 			return;
 		}
 		try {
@@ -184,7 +192,7 @@ exports.startup = function(callback) {
 	}
 
 	function handleFileDelete(filepath) {
-		if(isWatcherFile(filepath) || isRecentlyWritten(filepath)) {
+		if(isWatcherFile(filepath) || isRecentlyWritten(filepath) || isIgnoredTitle(filepath)) {
 			return;
 		}
 		var title = findTitleByPath(filepath);
@@ -222,7 +230,7 @@ exports.startup = function(callback) {
 
 	// Start watching
 	var watcher = chokidar.watch(tiddlersPath, {
-		ignored: /(^|[\/\\])\./,  // ignore dotfiles
+		ignored: [/(^|[\/\\])\./, /[\/\\]ext-outbox[\/\\]/],  // ignore dotfiles + ext-outbox (handled by Python connector)
 		persistent: true,
 		ignoreInitial: true,       // don't fire for existing files on startup
 		awaitWriteFinish: {

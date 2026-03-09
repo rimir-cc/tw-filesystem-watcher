@@ -10,6 +10,7 @@ Watches the tiddlers directory for external filesystem changes (created, modifie
 * **Reload alerts** -- yellow alert + red refresh icon for changes requiring a browser reload (module tiddlers, system tiddlers)
 * **Loop prevention** -- hooks TW's save/delete functions to ignore its own filesystem writes
 * **CLI mode skip** -- exits immediately when `TIDDLYWIKI_CLI_MODE=1` so CLI imports don't hang
+* **Ignored tiddlers** -- skips noisy tiddlers like `$:/StoryList` that change frequently and have no value for external sync
 * **Configurable poll interval** -- set sync frequency in settings
 
 ## Prerequisites
