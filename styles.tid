@@ -5,5 +5,5 @@ title: $:/plugins/rimir/filesystem-watcher/styles
 type: text/vnd.tiddlywiki
 
 body.fsw-reload-needed .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Frefresh svg {
-    fill: #ff0000;
+    fill: <<colour alert-highlight>>;
 }
