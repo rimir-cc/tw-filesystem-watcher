@@ -26,7 +26,7 @@ type: text/vnd.tiddlywiki
 !! CSS classes
 
 |!Class |!Element |!Description |
-|`tc-reload-needed` |`document.body` |Added when reload is needed, removed on F5 |
+|`fsw-reload-needed` |`document.body` |Added when reload is needed, removed on F5 |
 
 !! Internal constants (watcher.js)
 

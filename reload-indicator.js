@@ -24,7 +24,7 @@ exports.startup = function() {
 					title: "$:/temp/filesystem-watcher-reload-needed",
 					text: "yes"
 				});
-				document.body.classList.add("tc-reload-needed");
+				document.body.classList.add("fsw-reload-needed");
 			}
 		}
 	});

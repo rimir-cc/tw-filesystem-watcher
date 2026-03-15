@@ -6,6 +6,7 @@ type: text/vnd.tiddlywiki
 ! Changelog
 
 |!Version |!Date |!Changes |
+|v0.1.5 |2026-03-15 |Add name field to plugin.info, rename tc-reload-needed CSS class to fsw-reload-needed |
 |v0.1.4 |2026-03-15 |Add regression tests and CI test gate |
 |v0.1.3 |2026-03-09 |Bundle default `SyncPollingInterval` config tiddler with plugin |
 |v0.1.2 |2026-03-09 |Ignore `$:/StoryList` changes to reduce noise from frequent browser-side updates |

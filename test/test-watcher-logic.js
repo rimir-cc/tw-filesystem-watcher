@@ -125,8 +125,8 @@ describe("filesystem-watcher module metadata", function() {
 			expect(src).toContain("alerts/filesystem-watcher-reload");
 		});
 
-		it("should set the tc-reload-needed CSS class", function() {
-			expect(src).toContain("tc-reload-needed");
+		it("should set the fsw-reload-needed CSS class", function() {
+			expect(src).toContain("fsw-reload-needed");
 		});
 
 		it("should write to a $:/temp/ tiddler", function() {

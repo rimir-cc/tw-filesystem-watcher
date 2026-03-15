@@ -42,7 +42,7 @@ type: text/vnd.tiddlywiki
 !! Alert mechanism
 
 * Tiddlers tagged `$:/tags/Alert` render as yellow notification banners
-* Pattern borrowed from TW's dirty indicator: `body.tc-dirty` → adapted as `body.tc-reload-needed`
+* Pattern borrowed from TW's dirty indicator: `body.tc-dirty` → adapted as `body.fsw-reload-needed`
 
 <$transclude $tiddler="$:/plugins/rimir/doc-template/templates/callout" type="info">
 <$fill $name="body">`$:/config/SyncSystemTiddlersFromServer` defaults to `"no"` — this is why system tiddlers need a full page reload to appear in the browser.</$fill>
