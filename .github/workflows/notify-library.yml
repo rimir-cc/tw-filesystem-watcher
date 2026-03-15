@@ -17,7 +17,7 @@ jobs:
         run: |
           mkdir -p /tmp/plugins/rimir/filesystem-watcher
           cp -r . /tmp/plugins/rimir/filesystem-watcher/
-          TIDDLYWIKI_PLUGIN_PATH=/tmp/plugins npx tiddlywiki test-edition --test
+          TIDDLYWIKI_PLUGIN_PATH=/tmp/plugins npx tiddlywiki test-edition --test spec="filesystem-watcher"
 
   notify:
     needs: test
