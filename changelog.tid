@@ -6,6 +6,7 @@ type: text/vnd.tiddlywiki
 ! Changelog
 
 |!Version |!Date |!Changes |
+|v0.1.8 |2026-03-27 |Fix docs: replace hardcoded poll interval with transclusion, correct config.tid filename references |
 |v0.1.7 |2026-03-27 |Fix docs: correct SyncPollingInterval default, transclude live values, fix restart rules, add settings UI, add ext-outbox to chokidar docs |
 |v0.1.6 |2026-03-15 |Replace hardcoded color with theme palette |
 |v0.1.5 |2026-03-15 |Add name field to plugin.info, rename tc-reload-needed CSS class to fsw-reload-needed |

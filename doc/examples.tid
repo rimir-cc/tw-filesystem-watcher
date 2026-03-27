@@ -15,7 +15,7 @@ type: text/vnd.tiddlywiki
 
 # Open `mywiki/tiddlers/MyTiddler.tid` in VS Code (or any text editor)
 # Change the `text:` content and save the file
-# Within ~4 seconds (poll interval), the tiddler updates in the browser
+# Within the configured poll interval (default: {{$:/config/SyncPollingInterval}}ms), the tiddler updates in the browser
 # No server restart needed — the watcher detects the change via chokidar
 
 !! Create a new tiddler from the filesystem
@@ -51,16 +51,7 @@ Edit or create multiple `.tid` files at once (e.g., via a script). Each file tri
 
 !! Adjusting the poll interval
 
-Edit `config.tid` in the plugin directory to change `$:/config/SyncPollingInterval`:
-
-```
-title: $:/config/SyncPollingInterval
-type: text/plain
-
-2000
-```
-
-Lower values (e.g., 2000ms) mean faster sync but more HTTP requests.
+Override `$:/config/SyncPollingInterval` in the wiki store (create a regular tiddler with that title), or use the settings panel in ControlPanel > Settings > Rimi Plugins. The plugin bundles a default of {{$:/config/SyncPollingInterval}}ms. Lower values mean faster sync but more HTTP requests. Changes take effect immediately — no restart needed.
 
 </$fill>
 </$transclude>

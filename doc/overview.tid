@@ -25,7 +25,7 @@ Watches the wiki's tiddlers directory for external filesystem changes (create, m
 * ''Reload alerts'' — yellow alert + red refresh icon for system/module tiddlers
 * ''Loop prevention'' — hooks `saveTiddlerToFile`/`deleteTiddlerFile` with write-lock
 * ''Cross-platform'' — works on Windows, macOS, Linux
-* ''Configurable poll interval'' via `config.tid`
+* ''Configurable poll interval'' via `$:/config/SyncPollingInterval` (settings panel or wiki store)
 
 !! Prerequisites
 
