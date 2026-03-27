@@ -4,5 +4,19 @@ title: $:/plugins/rimir/filesystem-watcher/settings
 type: text/vnd.tiddlywiki
 
 <div class="rr-settings-info-card">
-No configurable settings. Future settings will appear here.
+
+!! Sync polling interval
+
+The browser polls the server for changes at this interval (milliseconds). The plugin default is ''{{$:/plugins/rimir/filesystem-watcher/config/SyncPollingInterval!!text}}''.
+
+<$edit-text tiddler="$:/config/SyncPollingInterval" tag="input" default="" class="rr-input" size="8"/> ms
+<$button class="tc-btn-invisible tc-tiddlylink" tooltip="Reset to plugin default">
+<$action-deletetiddler $tiddler="$:/config/SyncPollingInterval"/>
+reset to default
+</$button>
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/callout" type="info">
+<$fill $name="body">Lower values mean faster sync but more HTTP traffic. Changes take effect immediately — no restart needed.</$fill>
+</$transclude>
+
 </div>

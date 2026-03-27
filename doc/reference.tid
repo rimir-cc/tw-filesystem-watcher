@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 !! Config tiddlers
 
 |!Tiddler |!Default |!Description |
-|`$:/config/SyncPollingInterval` |`4000` |Browser polling interval in ms |
+|`$:/config/SyncPollingInterval` |{{$:/config/SyncPollingInterval}}ms (bundled with plugin) |Browser polling interval in ms |
 |`$:/config/SyncSystemTiddlersFromServer` |`"no"` |Whether system tiddlers sync (TW core, not plugin) |
 
 !! State / temp tiddlers
@@ -38,7 +38,7 @@ type: text/vnd.tiddlywiki
 !! chokidar config
 
 |!Option |!Value |
-|`ignored` |`/(^|[\/\\])\./` (dotfiles) |
+|`ignored` |`/(^\|[\/\\])\./` (dotfiles), `/[\/\\]ext-outbox[\/\\]/` (handled by ext-connect Python connector) |
 |`persistent` |`true` |
 |`ignoreInitial` |`true` |
 |`awaitWriteFinish.stabilityThreshold` |`200` |

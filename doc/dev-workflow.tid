@@ -17,12 +17,12 @@ type: text/vnd.tiddlywiki
 |`watcher.js` |Server-side startup module (chokidar watcher) |
 |`reload-indicator.js` |Browser-side module (sets temp flag + body class) |
 |`styles.tid` |CSS for red refresh icon |
-|`config.tid` |Sets `$:/config/SyncPollingInterval` |
+|`config/SyncPollingInterval.tid` |Bundles default `$:/config/SyncPollingInterval` |
 
 !! Tiddler behavior
 
 |!Tiddler type |!Sync behavior |!Alert? |
-|Regular tiddler |Syncs live to browser (~4s) |No |
+|Regular tiddler |Syncs live to browser (~{{$:/config/SyncPollingInterval}}ms) |No |
 |System tiddler (`$:/`) |Loads on server, doesn't sync |Yes — yellow alert + red icon |
 |Module tiddler (JS) |Loads on server, doesn't sync |Yes — yellow alert + red icon |
 
@@ -43,7 +43,7 @@ type: text/vnd.tiddlywiki
 |!Change |!Restart needed? |
 |Edit `watcher.js` |Yes — JS module |
 |Edit `reload-indicator.js` |Yes — JS module |
-|Edit `styles.tid` or `config.tid` |No — filesystem-watcher syncs these |
+|Edit `styles.tid` or `config/SyncPollingInterval.tid` |Yes — plugin shadow tiddlers (watcher only monitors `tiddlers/`, not plugin dirs) |
 
 </$fill>
 </$transclude>

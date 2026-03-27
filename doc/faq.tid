@@ -17,7 +17,7 @@ TiddlyWiki's browser-side syncer polls `GET /recipes/default/tiddlers.json` whic
 
 !! Q: How do I change the poll interval?
 
-Edit `config.tid` in the plugin directory. It sets `$:/config/SyncPollingInterval` (value in milliseconds). Default is `4000` (4 seconds). Lower values mean faster sync but more HTTP traffic.
+Override `$:/config/SyncPollingInterval` in the wiki store (value in milliseconds). The plugin bundles a default of {{$:/config/SyncPollingInterval}}ms. Lower values mean faster sync but more HTTP traffic. You can change it from the browser by creating a tiddler with that title, or by editing `config/SyncPollingInterval.tid` in the plugin directory (requires restart).
 
 !! Q: What if chokidar misses a change?
 

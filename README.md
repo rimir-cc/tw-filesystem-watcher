@@ -11,7 +11,7 @@ Watches the tiddlers directory for external filesystem changes (created, modifie
 * **Loop prevention** -- hooks TW's save/delete functions to ignore its own filesystem writes
 * **CLI mode skip** -- exits immediately when `TIDDLYWIKI_CLI_MODE=1` so CLI imports don't hang
 * **Ignored tiddlers** -- skips noisy tiddlers like `$:/StoryList` that change frequently and have no value for external sync
-* **Configurable poll interval** -- set sync frequency in settings
+* **Configurable poll interval** -- bundled default `$:/config/SyncPollingInterval` (2000ms, override in wiki store to change)
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ Watches the tiddlers directory for external filesystem changes (created, modifie
 
 ## Quick start
 
-Install plugin. Configure the poll interval in ControlPanel > Settings > filesystem watcher. External file changes in the tiddlers directory sync automatically into the running wiki.
+Install plugin and `chokidar` npm package. External file changes in the tiddlers directory sync automatically into the running wiki. The poll interval is set via `$:/config/SyncPollingInterval` (default: 2000ms).
 
 ## Plugin Library
 

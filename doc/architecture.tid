@@ -21,7 +21,7 @@ Filesystem change → chokidar → `$tw.loadTiddlersFromFile()` → `wiki.addTid
 |`watcher.js` |Server (Node.js) |Main module — chokidar watcher, file loading, loop prevention |
 |`reload-indicator.js` |Browser |Sets `$:/temp/` flag + `body.fsw-reload-needed` class on alert |
 |`styles.tid` |Browser CSS |Red refresh icon styling via `body.fsw-reload-needed` |
-|`config.tid` |Config |Sets `$:/config/SyncPollingInterval` |
+|`config/SyncPollingInterval.tid` |Config |Bundles default `$:/config/SyncPollingInterval` ({{$:/config/SyncPollingInterval}}ms) |
 
 !! Loop prevention
 
