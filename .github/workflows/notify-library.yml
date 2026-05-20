@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm install tiddlywiki chokidar
+      - run: npm install tiddlywiki@~5.4.0 chokidar
       - name: Run tests
         run: |
           mkdir -p /tmp/plugins/rimir/filesystem-watcher
